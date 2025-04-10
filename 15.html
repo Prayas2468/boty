@@ -1,0 +1,3429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeGenius | AI-Powered Home Improvement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5a67d8;
+            --primary-light: #7f9cf5;
+            --primary-dark: #4c51bf;
+            --secondary: #ecc94b;
+            --secondary-light: #f6e05e;
+            --secondary-dark: #d69e2e;
+            --accent: #667eea;
+            --dark: #2d3748;
+            --darker: #1a202c;
+            --light: #f7fafc;
+            --lighter: #ffffff;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --gray: #a0aec0;
+            --light-gray: #e2e8f0;
+            --dark-gray: #4a5568;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        body.dark-mode {
+            background-color: var(--darker);
+            color: var(--light);
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-secondary);
+            color: var(--darker);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-light), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .btn-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(90, 103, 216, 0.9), rgba(102, 126, 234, 0.9)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--darker);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(236, 201, 75, 0.3);
+        }
+
+        /* Main Content Grid */
+        .app-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .sidebar {
+            background-color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(90, 103, 216, 0.1);
+            color: var(--primary);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-item.active i {
+            color: var(--primary);
+        }
+
+        .menu-badge {
+            margin-left: auto;
+            background-color: var(--secondary);
+            color: var(--darker);
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Form Section */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .card {
+            background-color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        body.dark-mode .form-label {
+            color: var(--light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+
+        body.dark-mode .form-control {
+            background-color: var(--darker);
+            border-color: var(--dark-gray);
+            color: var(--light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Option Selectors */
+        .option-group {
+            margin-top: 0.5rem;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            background-color: var(--light);
+            border: 1px solid var(--light-gray);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark-mode .option-btn {
+            background-color: var(--dark);
+            border-color: var(--dark-gray);
+        }
+
+        .option-btn i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .option-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(90, 103, 216, 0.3);
+        }
+
+        .option-btn.selected i {
+            color: white;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            padding: 1rem;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(90, 103, 216, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(90, 103, 216, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .chat-container {
+            background-color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.25rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .chat-header i {
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: var(--light);
+            scroll-behavior: smooth;
+        }
+
+        body.dark-mode .chat-messages {
+            background-color: var(--darker);
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 1rem 1.25rem;
+            border-radius: var(--border-radius);
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+            box-shadow: var(--shadow-sm);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: var(--lighter);
+            color: var(--dark);
+            border: 1px solid var(--light-gray);
+            border-bottom-left-radius: 4px;
+        }
+
+        body.dark-mode .bot-message {
+            background-color: var(--dark);
+            border-color: var(--dark-gray);
+            color: var(--light);
+        }
+
+        .bot-message strong {
+            color: var(--primary);
+        }
+
+        .bot-message ul, .bot-message ol {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .bot-message li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 1rem;
+            background-color: var(--lighter);
+            border-top: 1px solid var(--light-gray);
+            position: sticky;
+            bottom: 0;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .chat-input-container {
+            background-color: var(--dark);
+            border-color: var(--dark-gray);
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            outline: none;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+
+        body.dark-mode #message-input {
+            background-color: var(--darker);
+            border-color: var(--dark-gray);
+            color: var(--light);
+        }
+
+        #message-input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+        }
+
+        #send-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            padding: 0 1.5rem;
+            margin-left: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #send-button:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Voice Input */
+        .voice-input-btn {
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            padding: 0.75rem;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-mode .voice-input-btn {
+            background-color: var(--dark-gray);
+        }
+
+        .voice-input-btn.listening {
+            background-color: var(--danger);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 35, 60, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 35, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 35, 60, 0); }
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            padding: 1rem;
+            align-self: flex-start;
+            background-color: var(--lighter);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .typing-indicator {
+            background-color: var(--dark);
+            border-color: var(--dark-gray);
+        }
+
+        .typing-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            margin: 0 3px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Project Card */
+        .project-card {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .project-card {
+            background-color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .project-card p {
+            color: var(--light-gray);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--gray);
+        }
+
+        body.dark-mode .meta-item {
+            color: var(--light-gray);
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin: 1rem 0;
+            height: 10px;
+        }
+
+        body.dark-mode .progress-container {
+            background-color: var(--dark-gray);
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .checklist {
+            margin-top: 1rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            accent-color: var(--primary);
+        }
+
+        .checklist-item label {
+            flex: 1;
+        }
+
+        .checklist-item.completed label {
+            text-decoration: line-through;
+            color: var(--gray);
+        }
+
+        /* Material Calculator */
+        .calculator {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.dark-mode .calculator {
+            background-color: var(--dark);
+        }
+
+        .calculator-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .calculator-label {
+            flex: 1;
+        }
+
+        .calculator-input {
+            width: 100px;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+        }
+
+        body.dark-mode .calculator-input {
+            background-color: var(--darker);
+            border-color: var(--dark-gray);
+            color: var(--light);
+        }
+
+        .calculator-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(90, 103, 216, 0.1);
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+        }
+
+        body.dark-mode .calculator-result {
+            background-color: rgba(90, 103, 216, 0.2);
+        }
+
+        /* Video Tutorials */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .video-card {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .video-card {
+            background-color: var(--dark);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-color: var(--dark);
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(236, 201, 75, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--darker);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .video-play-btn:hover {
+            background-color: var(--secondary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-duration {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Rating System */
+        .rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating-star {
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .rating-star:hover, .rating-star.active {
+            color: var(--warning);
+        }
+
+        /* Export Options */
+        .export-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .export-btn {
+            background-color: var(--dark-gray);
+        }
+
+        .export-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: var(--lighter);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            transform: translateY(20px);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.dark-mode .modal-content {
+            background-color: var(--dark);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body.dark-mode .modal-header {
+            border-color: var(--dark-gray);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        body.dark-mode .modal-footer {
+            border-color: var(--dark-gray);
+        }
+
+        /* Login Form */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .auth-toggle {
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Alert */
+        .alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert-success {
+            background-color: var(--success);
+        }
+
+        .alert-error {
+            background-color: var(--danger);
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            border-radius: var(--border-radius-sm);
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .option-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .hero {
+                padding: 1.5rem 1rem;
+                border-radius: 8px;
+            }
+            
+            .card, .sidebar {
+                padding: 1rem;
+            }
+            
+            .form-title {
+                font-size: 1.2rem;
+            }
+            
+            .option-btn {
+                padding: 0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="dark-mode-toggle">
+        <i class="fas fa-moon" id="dark-mode-icon"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-home"></i>
+            <span>HomeGenius</span>
+        </div>
+        <nav>
+            <a href="#" class="nav-link" data-section="project-planner"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-link" data-section="my-projects"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="#" class="nav-link" data-section="video-tutorials"><i class="fas fa-video"></i> Tutorials</a>
+            <a href="#" class="nav-link" data-section="material-calc"><i class="fas fa-calculator"></i> Calculator</a>
+        </nav>
+        <div class="user-actions">
+            <button class="btn btn-outline" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-primary" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="feature-badge">
+                    <i class="fas fa-star"></i> AI-POWERED HOME IMPROVEMENT
+                </div>
+                <h1>Transform Your Home with Expert Guidance</h1>
+                <p class="tagline">Get personalized home improvement recommendations, step-by-step guidance, and all the tools you need for your next project</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" id="start-project-btn">
+                        <i class="fas fa-plus"></i> Start New Project
+                    </button>
+                    <button class="btn btn-outline" id="explore-btn">
+                        <i class="fas fa-compass"></i> Explore Ideas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Container -->
+        <div class="app-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3 class="sidebar-title"><i class="fas fa-bars"></i> Menu</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item active" data-section="project-planner">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Project Planner</span>
+                    </li>
+                    <li class="menu-item" data-section="my-projects">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>My Projects</span>
+                        <span class="menu-badge">3</span>
+                    </li>
+                    <li class="menu-item" data-section="material-calc">
+                        <i class="fas fa-calculator"></i>
+                        <span>Material Calculator</span>
+                    </li>
+                    <li class="menu-item" data-section="video-tutorials">
+                        <i class="fas fa-video"></i>
+                        <span>Video Tutorials</span>
+                    </li>
+                    <li class="menu-item" data-section="saved-projects">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Saved Projects</span>
+                    </li>
+                    <li class="menu-item" data-section="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Project Planner Section -->
+                <div class="card" id="project-planner-section">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-lightbulb"></i> Home Improvement Planner</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-icon" title="Save Project" id="save-project-btn">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                            <button class="btn btn-icon" title="Share Project" id="share-project-btn">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-name" class="form-label">Project Name</label>
+                        <input type="text" id="project-name" class="form-control" placeholder="e.g., Kitchen Remodel, Bathroom Upgrade">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Project Type</label>
+                        <div class="option-group">
+                            <div class="option-grid" id="project-options">
+                                <div class="option-btn" data-value="kitchen">
+                                    <i class="fas fa-utensils"></i>
+                                    Kitchen
+                                </div>
+                                <div class="option-btn" data-value="bathroom">
+                                    <i class="fas fa-bath"></i>
+                                    Bathroom
+                                </div>
+                                <div class="option-btn" data-value="living room">
+                                    <i class="fas fa-couch"></i>
+                                    Living Room
+                                </div>
+                                <div class="option-btn" data-value="bedroom">
+                                    <i class="fas fa-bed"></i>
+                                    Bedroom
+                                </div>
+                                <div class="option-btn" data-value="outdoor">
+                                    <i class="fas fa-tree"></i>
+                                    Outdoor
+                                </div>
+                                <div class="option-btn" data-value="flooring">
+                                    <i class="fas fa-border-style"></i>
+                                    Flooring
+                                </div>
+                                <div class="option-btn" data-value="painting">
+                                    <i class="fas fa-paint-roller"></i>
+                                    Painting
+                                </div>
+                                <div class="option-btn" data-value="other">
+                                    <i class="fas fa-plus"></i>
+                                    Other
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skill-level" class="form-label">Your Skill Level</label>
+                        <select id="skill-level" class="form-control">
+                            <option value="beginner">Beginner (First-time DIYer)</option>
+                            <option value="intermediate" selected>Intermediate (Some experience)</option>
+                            <option value="advanced">Advanced (Comfortable with most tools)</option>
+                            <option value="expert">Expert (Professional-level skills)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Project Budget</label>
+                        <div class="option-group">
+                            <div class="option-grid" id="budget-options">
+                                <div class="option-btn" data-value="under $500">Under $500</div>
+                                <div class="option-btn" data-value="$500-$2,000">$500-$2,000</div>
+                                <div class="option-btn" data-value="$2,000-$10,000">$2,000-$10,000</div>
+                                <div class="option-btn" data-value="over $10,000">$10,000+</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time-commitment" class="form-label">Time Commitment</label>
+                        <select id="time-commitment" class="form-control">
+                            <option value="weekend">A weekend</option>
+                            <option value="1-2 weeks" selected>1-2 weeks</option>
+                            <option value="1 month">1 month</option>
+                            <option value="several months">Several months</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tools" class="form-label">Tools You Have Available</label>
+                        <textarea id="tools" class="form-control" placeholder="List the tools you have (e.g., drill, saw, paint brushes)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goals" class="form-label">Project Goals & Description</label>
+                        <textarea id="goals" class="form-control" placeholder="Describe what you want to achieve (e.g., 'Modernize my kitchen', 'Create a spa-like bathroom')"></textarea>
+                    </div>
+                    
+                    <button class="submit-btn" id="get-recommendations">
+                        <i class="fas fa-magic"></i> Generate AI-Powered Plan
+                    </button>
+                </div>
+
+                <!-- AI Chat Assistant Section -->
+                <div class="card hidden" id="chat-assistant-section">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <i class="fas fa-robot"></i> Home Improvement Assistant
+                        </div>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot-message">
+                                <strong>Welcome to your Home Improvement Assistant!</strong><br><br>
+                                I can help you plan, troubleshoot, and guide you through your home projects. 
+                                Ask me anything about materials, techniques, or project ideas!<br><br>
+                                Try asking:
+                                <ul>
+                                    <li>"What are some budget-friendly kitchen upgrades?"</li>
+                                    <li>"How can I modernize my bathroom?"</li>
+                                    <li>"What tools do I need for a flooring project?"</li>
+                                    <li>"Tell me more about yourself"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <button class="voice-input-btn" id="voice-input-btn" title="Voice Input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <input type="text" id="message-input" placeholder="Ask about your home improvement project...">
+                            <button id="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Tracker Section -->
+                <div class="card hidden" id="project-tracker-section">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-project-diagram"></i> My Home Projects</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-icon" id="add-project-btn" title="Add Project">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3><i class="fas fa-utensils"></i> Kitchen Remodel</h3>
+                        <p>Modernize kitchen with new countertops, backsplash, and lighting</p>
+                        
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-tachometer-alt"></i> Advanced
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-dollar-sign"></i> $5,000-$10,000
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i> 1-2 months
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                        
+                        <div class="checklist">
+                            <h4>Project Checklist</h4>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step1" checked>
+                                <label for="step1">Research design inspiration</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step2" checked>
+                                <label for="step2">Create budget and material list</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step3">
+                                <label for="step3">Order materials and appliances</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step4">
+                                <label for="step4">Remove old countertops and backsplash</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step5">
+                                <label for="step5">Install new countertops</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step6">
+                                <label for="step6">Install backsplash tile</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="step7">
+                                <label for="step7">Update lighting fixtures</label>
+                            </div>
+                        </div>
+                        
+                        <div class="export-options">
+                            <div class="export-btn" id="export-pdf">
+                                <i class="fas fa-file-pdf"></i> Export PDF
+                            </div>
+                            <div class="export-btn" id="share-project">
+                                <i class="fas fa-share-alt"></i> Share
+                            </div>
+                            <div class="export-btn" id="print-project">
+                                <i class="fas fa-print"></i> Print
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3><i class="fas fa-bath"></i> Bathroom Refresh</h3>
+                        <p>Update fixtures, paint, and storage in main bathroom</p>
+                        
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-tachometer-alt"></i> Intermediate
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-dollar-sign"></i> $1,000-$2,000
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i> 2-3 weeks
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3><i class="fas fa-paint-roller"></i> Exterior Painting</h3>
+                        <p>Refresh home exterior with new paint color</p>
+                        
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-tachometer-alt"></i> Beginner
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-dollar-sign"></i> $500-$1,000
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i> 1-2 weekends
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Calculator Section -->
+                <div class="card hidden" id="material-calculator-section">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-calculator"></i> Home Improvement Calculator</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-icon" title="Save Calculation" id="save-calculation">
+                                <i class="fas fa-save"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-project-type" class="form-label">Project Type</label>
+                        <select id="calc-project-type" class="form-control">
+                            <option value="painting">Painting</option>
+                            <option value="flooring">Flooring</option>
+                            <option value="tiling">Tiling</option>
+                            <option value="deck">Deck Building</option>
+                            <option value="fence">Fence</option>
+                            <option value="drywall">Drywall</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calculator">
+                        <div class="calculator-row">
+                            <div class="calculator-label">Length (ft)</div>
+                            <input type="number" class="calculator-input" id="calc-length" value="10">
+                        </div>
+                        <div class="calculator-row">
+                            <div class="calculator-label">Width (ft)</div>
+                            <input type="number" class="calculator-input" id="calc-width" value="5">
+                        </div>
+                        <div class="calculator-row">
+                            <div class="calculator-label">Height (ft)</div>
+                            <input type="number" class="calculator-input" id="calc-height" value="1">
+                        </div>
+                        
+                        <div class="calculator-result" id="calc-result">
+                            <strong>Estimated Materials Needed:</strong><br>
+                            - 20 boards (8ft length)<br>
+                            - 2 boxes of screws<br>
+                            - 1 gallon of stain<br>
+                            - 4 corner brackets
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="calculate-btn">
+                        <i class="fas fa-calculator"></i> Calculate Materials
+                    </button>
+                </div>
+
+                <!-- Video Tutorials Section -->
+                <div class="card hidden" id="video-tutorials-section">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-video"></i> Home Improvement Tutorials</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-icon" title="Search" id="search-tutorials">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/7vX2j9O7RkE/maxresdefault.jpg" alt="DIY Kitchen">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">Kitchen Cabinet Makeover on a Budget</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 12:45
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <span>(128)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/3FLEvOWdQh0/maxresdefault.jpg" alt="Bathroom Remodel">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">Bathroom Tile Installation Guide</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 18:30
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <span>(245)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/5bTp8bGqN8Y/maxresdefault.jpg" alt="Painting Tips">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">Professional Painting Techniques</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 9:15
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <span>(87)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/8Qn_spdM5Zg/maxresdefault.jpg" alt="Flooring Installation">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">How to Install Laminate Flooring</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 14:20
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <span>(156)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/9X_QjJg-n4k/maxresdefault.jpg" alt="Outdoor Projects">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">DIY Deck Building Guide</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 22:10
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <span>(312)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <img src="https://i.ytimg.com/vi/2E5aOl5QmOo/maxresdefault.jpg" alt="Lighting Upgrade">
+                                <div class="video-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">Modern Lighting Installation</div>
+                                <div class="video-duration">
+                                    <i class="fas fa-clock"></i> 11:45
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star active"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <span>(76)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-sign-in-alt"></i> Login</h3>
+                <button class="modal-close" id="login-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    Don't have an account? <span class="auth-toggle" id="show-register">Register</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-user-plus"></i> Register</h3>
+                <button class="modal-close" id="register-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label for="register-name" class="form-label">Full Name</label>
+                        <input type="text" id="register-name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email" class="form-label">Email</label>
+                        <input type="email" id="register-email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password" class="form-label">Password</label>
+                        <input type="password" id="register-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm" class="form-label">Confirm Password</label>
+                        <input type="password" id="register-confirm" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                <div class="auth-footer">
+                    Already have an account? <span class="auth-toggle" id="show-login">Login</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="modal" id="video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="video-modal-title">Video Tutorial</h3>
+                <button class="modal-close" id="video-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe id="video-iframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+                            src="about:blank" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const darkModeIcon = document.getElementById('dark-mode-icon');
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+            const loginClose = document.getElementById('login-close');
+            const registerClose = document.getElementById('register-close');
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const menuItems = document.querySelectorAll('.menu-item');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = {
+                'project-planner': document.getElementById('project-planner-section'),
+                'my-projects': document.getElementById('project-tracker-section'),
+                'material-calc': document.getElementById('material-calculator-section'),
+                'video-tutorials': document.getElementById('video-tutorials-section'),
+                'saved-projects': document.getElementById('project-tracker-section'),
+                'community': document.getElementById('project-tracker-section'),
+                'chat-assistant': document.getElementById('chat-assistant-section')
+            };
+            const projectOptions = document.querySelectorAll('#project-options .option-btn');
+            const budgetOptions = document.querySelectorAll('#budget-options .option-btn');
+            const getRecsBtn = document.getElementById('get-recommendations');
+            const chatMessages = document.getElementById('chat-messages');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const voiceInputBtn = document.getElementById('voice-input-btn');
+            const videoPlayBtns = document.querySelectorAll('.video-play-btn');
+            const videoModal = document.getElementById('video-modal');
+            const videoClose = document.getElementById('video-close');
+            const videoIframe = document.getElementById('video-iframe');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const calcResult = document.getElementById('calc-result');
+            const ratingStars = document.querySelectorAll('.rating-star');
+            const startProjectBtn = document.getElementById('start-project-btn');
+            const addProjectBtn = document.getElementById('add-project-btn');
+            const saveProjectBtn = document.getElementById('save-project-btn');
+            const shareProjectBtn = document.getElementById('share-project-btn');
+            const exportPdfBtn = document.getElementById('export-pdf');
+            const printProjectBtn = document.getElementById('print-project');
+            const saveCalculationBtn = document.getElementById('save-calculation');
+            const searchTutorialsBtn = document.getElementById('search-tutorials');
+            const exploreBtn = document.getElementById('explore-btn');
+            
+            // State variables
+            let selectedProjectType = '';
+            let selectedBudget = '';
+            let isListening = false;
+            let recognition;
+            let conversationHistory = [];
+            const projectDetails = {
+                projectType: '',
+                skillLevel: '',
+                budget: '',
+                timeCommitment: '',
+                tools: '',
+                goals: ''
+            };
+            let savedProjects = [
+                {
+                    name: "Kitchen Remodel",
+                    type: "kitchen",
+                    skill: "advanced",
+                    budget: "$5,000-$10,000",
+                    time: "1-2 months",
+                    progress: 45,
+                    checklist: [
+                        { id: "step1", text: "Research design inspiration", completed: true },
+                        { id: "step2", text: "Create budget and material list", completed: true },
+                        { id: "step3", text: "Order materials and appliances", completed: false },
+                        { id: "step4", text: "Remove old countertops and backsplash", completed: false },
+                        { id: "step5", text: "Install new countertops", completed: false },
+                        { id: "step6", text: "Install backsplash tile", completed: false },
+                        { id: "step7", text: "Update lighting fixtures", completed: false }
+                    ]
+                },
+                {
+                    name: "Bathroom Refresh",
+                    type: "bathroom",
+                    skill: "intermediate",
+                    budget: "$1,000-$2,000",
+                    time: "2-3 weeks",
+                    progress: 30,
+                    checklist: []
+                },
+                {
+                    name: "Exterior Painting",
+                    type: "painting",
+                    skill: "beginner",
+                    budget: "$500-$1,000",
+                    time: "1-2 weekends",
+                    progress: 15,
+                    checklist: []
+                }
+            ];
+
+            // Initialize the app
+            function init() {
+                // Check for saved dark mode preference
+                if (localStorage.getItem('darkMode') === 'enabled') {
+                    enableDarkMode();
+                }
+                
+                // Set up event listeners
+                setupEventListeners();
+                
+                // Initialize option selectors
+                initOptionSelectors();
+                
+                // Initialize voice recognition if available
+                initVoiceRecognition();
+                
+                // Load saved projects if any
+                loadSavedProjects();
+            }
+            
+            // Set up event listeners
+            function setupEventListeners() {
+                // Dark mode toggle
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+                
+                // Auth modals
+                loginBtn.addEventListener('click', () => toggleModal(loginModal));
+                registerBtn.addEventListener('click', () => toggleModal(registerModal));
+                loginClose.addEventListener('click', () => toggleModal(loginModal));
+                registerClose.addEventListener('click', () => toggleModal(registerModal));
+                showRegister.addEventListener('click', () => {
+                    toggleModal(loginModal);
+                    toggleModal(registerModal);
+                });
+                showLogin.addEventListener('click', () => {
+                    toggleModal(registerModal);
+                    toggleModal(loginModal);
+                });
+                
+                // Auth forms
+                loginForm.addEventListener('submit', handleLogin);
+                registerForm.addEventListener('submit', handleRegister);
+                
+                // Sidebar menu
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // Remove active class from all items
+                        menuItems.forEach(i => i.classList.remove('active'));
+                        // Add active class to clicked item
+                        item.classList.add('active');
+                        // Show corresponding section
+                        const sectionId = item.getAttribute('data-section');
+                        showSection(sectionId);
+                    });
+                });
+                
+                // Navigation links
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const sectionId = link.getAttribute('data-section');
+                        
+                        // Update active menu item
+                        menuItems.forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('data-section') === sectionId) {
+                                item.classList.add('active');
+                            }
+                        });
+                        
+                        showSection(sectionId);
+                    });
+                });
+                
+                // Start project button
+                startProjectBtn.addEventListener('click', () => {
+                    showSection('project-planner');
+                    // Scroll to the planner section
+                    document.getElementById('project-planner-section').scrollIntoView({ behavior: 'smooth' });
+                });
+                
+                // Explore button
+                exploreBtn.addEventListener('click', () => {
+                    showSection('video-tutorials');
+                    document.getElementById('video-tutorials-section').scrollIntoView({ behavior: 'smooth' });
+                });
+                
+                // Add project button
+                addProjectBtn?.addEventListener('click', addNewProject);
+                
+                // Save project button
+                saveProjectBtn?.addEventListener('click', saveCurrentProject);
+                
+                // Share project button
+                shareProjectBtn?.addEventListener('click', shareProject);
+                
+                // Export PDF button
+                exportPdfBtn?.addEventListener('click', exportProjectToPdf);
+                
+                // Print project button
+                printProjectBtn?.addEventListener('click', printProject);
+                
+                // Save calculation button
+                saveCalculationBtn?.addEventListener('click', saveCalculation);
+                
+                // Search tutorials button
+                searchTutorialsBtn?.addEventListener('click', searchTutorials);
+                
+                // Get recommendations button
+                getRecsBtn.addEventListener('click', getRecommendations);
+                
+                // Chat functionality
+                sendButton.addEventListener('click', sendMessage);
+                messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+                
+                // Voice input
+                voiceInputBtn.addEventListener('click', toggleVoiceInput);
+                
+                // Video play buttons
+                videoPlayBtns.forEach((btn, index) => {
+                    btn.addEventListener('click', () => playVideo(index));
+                });
+                
+                // Video modal close
+                videoClose.addEventListener('click', () => toggleModal(videoModal));
+                
+                // Material calculator
+                calculateBtn?.addEventListener('click', calculateMaterials);
+                
+                // Rating stars
+                ratingStars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const ratingContainer = this.closest('.rating');
+                        const stars = ratingContainer.querySelectorAll('.rating-star');
+                        const clickedIndex = Array.from(stars).indexOf(this);
+                        
+                        stars.forEach((s, index) => {
+                            if (index <= clickedIndex) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // Initialize option selectors
+            function initOptionSelectors() {
+                // Project type options
+                projectOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        projectOptions.forEach(opt => opt.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedProjectType = this.getAttribute('data-value');
+                        projectDetails.projectType = selectedProjectType;
+                    });
+                });
+                
+                // Budget options
+                budgetOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        budgetOptions.forEach(opt => opt.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedBudget = this.getAttribute('data-value');
+                        projectDetails.budget = selectedBudget;
+                    });
+                });
+            }
+            
+            // Initialize voice recognition
+            function initVoiceRecognition() {
+                try {
+                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if (SpeechRecognition) {
+                        recognition = new SpeechRecognition();
+                        recognition.continuous = false;
+                        recognition.interimResults = false;
+                        
+                        recognition.onresult = (event) => {
+                            const transcript = event.results[0][0].transcript;
+                            messageInput.value = transcript;
+                        };
+                        
+                        recognition.onerror = (event) => {
+                            console.error('Speech recognition error', event.error);
+                            showAlert('Voice input error: ' + event.error, 'error');
+                            stopVoiceInput();
+                        };
+                        
+                        recognition.onend = () => {
+                            if (isListening) {
+                                stopVoiceInput();
+                            }
+                        };
+                    }
+                } catch (e) {
+                    console.warn('Speech recognition not available', e);
+                    voiceInputBtn.style.display = 'none';
+                }
+            }
+            
+            // Load saved projects
+            function loadSavedProjects() {
+                const saved = localStorage.getItem('savedProjects');
+                if (saved) {
+                    savedProjects = JSON.parse(saved);
+                    updateProjectBadge();
+                }
+            }
+            
+            // Update project badge count
+            function updateProjectBadge() {
+                const badge = document.querySelector('.menu-item[data-section="my-projects"] .menu-badge');
+                if (badge) {
+                    badge.textContent = savedProjects.length;
+                }
+            }
+            
+            // Save projects to localStorage
+            function saveProjectsToStorage() {
+                localStorage.setItem('savedProjects', JSON.stringify(savedProjects));
+            }
+            
+            // Toggle dark mode
+            function toggleDarkMode() {
+                if (document.body.classList.contains('dark-mode')) {
+                    disableDarkMode();
+                } else {
+                    enableDarkMode();
+                }
+            }
+            
+            function enableDarkMode() {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            }
+            
+            function disableDarkMode() {
+                document.body.classList.remove('dark-mode');
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+            
+            // Toggle modal
+            function toggleModal(modal) {
+                modal.classList.toggle('active');
+                document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
+            }
+            
+            // Show section
+            function showSection(sectionId) {
+                // Hide all sections
+                Object.values(sections).forEach(section => {
+                    section?.classList.add('hidden');
+                });
+                
+                // Show selected section
+                if (sections[sectionId]) {
+                    sections[sectionId].classList.remove('hidden');
+                    
+                    // Special handling for certain sections
+                    if (sectionId === 'project-planner') {
+                        setTimeout(() => {
+                            document.getElementById('project-name')?.focus();
+                        }, 300);
+                    } else if (sectionId === 'my-projects' || sectionId === 'saved-projects') {
+                        renderProjectsList();
+                    } else if (sectionId === 'chat-assistant') {
+                        setTimeout(() => {
+                            messageInput.focus();
+                        }, 300);
+                    }
+                }
+            }
+            
+            // Render projects list
+            function renderProjectsList() {
+                const container = document.getElementById('project-tracker-section');
+                if (!container) return;
+                
+                let html = `
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-project-diagram"></i> My Home Projects</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-icon" id="add-project-btn" title="Add Project">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                savedProjects.forEach((project, index) => {
+                    html += `
+                        <div class="project-card" data-project-id="${index}">
+                            <h3><i class="fas fa-${getProjectIcon(project.type)}"></i> ${project.name}</h3>
+                            <p>${project.type} project - ${project.goals || 'No description available'}</p>
+                            
+                            <div class="project-meta">
+                                <div class="meta-item">
+                                    <i class="fas fa-tachometer-alt"></i> ${capitalizeFirstLetter(project.skill)}
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-dollar-sign"></i> ${project.budget}
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i> ${project.time}
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: ${project.progress}%"></div>
+                            </div>
+                            
+                            ${renderChecklist(project)}
+                            
+                            <div class="export-options">
+                                <div class="export-btn" onclick="editProject(${index})">
+                                    <i class="fas fa-edit"></i> Edit
+                                </div>
+                                <div class="export-btn" onclick="deleteProject(${index})">
+                                    <i class="fas fa-trash"></i> Delete
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+                
+                // Reattach event listeners
+                document.getElementById('add-project-btn')?.addEventListener('click', addNewProject);
+            }
+            
+            // Get project icon based on type
+            function getProjectIcon(type) {
+                const icons = {
+                    kitchen: 'utensils',
+                    bathroom: 'bath',
+                    'living room': 'couch',
+                    bedroom: 'bed',
+                    outdoor: 'tree',
+                    flooring: 'border-style',
+                    painting: 'paint-roller',
+                    other: 'home'
+                };
+                return icons[type] || 'home';
+            }
+            
+            // Capitalize first letter
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+            
+            // Render checklist
+            function renderChecklist(project) {
+                if (!project.checklist || project.checklist.length === 0) {
+                    return '';
+                }
+                
+                let html = '<div class="checklist"><h4>Project Checklist</h4>';
+                
+                project.checklist.forEach((item, idx) => {
+                    html += `
+                        <div class="checklist-item ${item.completed ? 'completed' : ''}">
+                            <input type="checkbox" id="step-${item.id}" ${item.completed ? 'checked' : ''} 
+                                   onchange="toggleChecklistItem('${project.name}', '${item.id}')">
+                            <label for="step-${item.id}">${item.text}</label>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+                return html;
+            }
+            
+            // Toggle checklist item
+            function toggleChecklistItem(projectName, itemId) {
+                const project = savedProjects.find(p => p.name === projectName);
+                if (!project) return;
+                
+                const item = project.checklist.find(i => i.id === itemId);
+                if (item) {
+                    item.completed = !item.completed;
+                    
+                    // Update progress
+                    const completedCount = project.checklist.filter(i => i.completed).length;
+                    project.progress = Math.round((completedCount / project.checklist.length) * 100);
+                    
+                    saveProjectsToStorage();
+                    renderProjectsList();
+                }
+            }
+            
+            // Edit project
+            function editProject(index) {
+                const project = savedProjects[index];
+                if (!project) return;
+                
+                // Populate the project planner form
+                document.getElementById('project-name').value = project.name;
+                document.getElementById('skill-level').value = project.skill;
+                document.getElementById('time-commitment').value = project.time;
+                document.getElementById('tools').value = project.tools || '';
+                document.getElementById('goals').value = project.goals || '';
+                
+                // Select project type
+                const projectTypeBtn = document.querySelector(`.option-btn[data-value="${project.type}"]`);
+                if (projectTypeBtn) {
+                    projectOptions.forEach(opt => opt.classList.remove('selected'));
+                    projectTypeBtn.classList.add('selected');
+                    selectedProjectType = project.type;
+                }
+                
+                // Select budget
+                const budgetBtn = document.querySelector(`.option-btn[data-value="${project.budget}"]`);
+                if (budgetBtn) {
+                    budgetOptions.forEach(opt => opt.classList.remove('selected'));
+                    budgetBtn.classList.add('selected');
+                    selectedBudget = project.budget;
+                }
+                
+                // Show project planner
+                showSection('project-planner');
+                document.getElementById('project-planner-section').scrollIntoView({ behavior: 'smooth' });
+                
+                // Update save button to indicate editing
+                getRecsBtn.innerHTML = '<i class="fas fa-save"></i> Update Project';
+                getRecsBtn.onclick = function() {
+                    updateProject(index);
+                };
+            }
+            
+            // Update project
+            function updateProject(index) {
+                const projectName = document.getElementById('project-name').value;
+                const skillLevel = document.getElementById('skill-level').value;
+                const timeCommitment = document.getElementById('time-commitment').value;
+                const tools = document.getElementById('tools').value;
+                const goals = document.getElementById('goals').value;
+                
+                if (!projectName || !selectedProjectType) {
+                    showAlert('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Update project
+                savedProjects[index] = {
+                    ...savedProjects[index],
+                    name: projectName,
+                    type: selectedProjectType,
+                    skill: skillLevel,
+                    budget: selectedBudget,
+                    time: timeCommitment,
+                    tools,
+                    goals
+                };
+                
+                saveProjectsToStorage();
+                showAlert('Project updated successfully!', 'success');
+                
+                // Reset button
+                getRecsBtn.innerHTML = '<i class="fas fa-magic"></i> Generate AI-Powered Plan';
+                getRecsBtn.onclick = getRecommendations;
+                
+                // Show projects list
+                showSection('my-projects');
+            }
+            
+            // Delete project
+            function deleteProject(index) {
+                if (confirm('Are you sure you want to delete this project?')) {
+                    savedProjects.splice(index, 1);
+                    saveProjectsToStorage();
+                    updateProjectBadge();
+                    renderProjectsList();
+                    showAlert('Project deleted successfully', 'success');
+                }
+            }
+            
+            // Add new project
+            function addNewProject() {
+                // Reset form
+                document.getElementById('project-name').value = '';
+                document.getElementById('skill-level').value = 'intermediate';
+                document.getElementById('time-commitment').value = '1-2 weeks';
+                document.getElementById('tools').value = '';
+                document.getElementById('goals').value = '';
+                
+                // Reset selections
+                projectOptions.forEach(opt => opt.classList.remove('selected'));
+                budgetOptions.forEach(opt => opt.classList.remove('selected'));
+                selectedProjectType = '';
+                selectedBudget = '';
+                
+                // Show project planner
+                showSection('project-planner');
+                document.getElementById('project-planner-section').scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset button
+                getRecsBtn.innerHTML = '<i class="fas fa-magic"></i> Generate AI-Powered Plan';
+                getRecsBtn.onclick = getRecommendations;
+            }
+            
+            // Handle login
+            function handleLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // In a real app, this would validate and send to server
+                console.log('Login attempt with:', { email, password });
+                
+                // Simulate successful login
+                showAlert('Login successful!', 'success');
+                toggleModal(loginModal);
+                
+                // Update UI for logged in user
+                document.querySelector('.user-actions').innerHTML = `
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar">
+                        <span>John D.</span>
+                    </div>
+                    <button class="btn btn-outline" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                `;
+                
+                // Add logout handler
+                document.getElementById('logout-btn')?.addEventListener('click', logout);
+            }
+            
+            // Handle register
+            function handleRegister(e) {
+                e.preventDefault();
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirm = document.getElementById('register-confirm').value;
+                
+                if (password !== confirm) {
+                    showAlert('Passwords do not match', 'error');
+                    return;
+                }
+                
+                // In a real app, this would validate and send to server
+                console.log('Registration attempt with:', { name, email, password });
+                
+                // Simulate successful registration
+                showAlert('Registration successful! Please login.', 'success');
+                toggleModal(registerModal);
+                toggleModal(loginModal);
+            }
+            
+            // Logout
+            function logout() {
+                // In a real app, this would clear session
+                showAlert('Logged out successfully', 'success');
+                
+                // Reset UI
+                document.querySelector('.user-actions').innerHTML = `
+                    <button class="btn btn-outline" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    <button class="btn btn-primary" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+                `;
+                
+                // Reattach event listeners
+                document.getElementById('login-btn').addEventListener('click', () => toggleModal(loginModal));
+                document.getElementById('register-btn').addEventListener('click', () => toggleModal(registerModal));
+            }
+            
+            // Save current project
+            function saveCurrentProject() {
+                const projectName = document.getElementById('project-name').value;
+                const skillLevel = document.getElementById('skill-level').value;
+                const timeCommitment = document.getElementById('time-commitment').value;
+                const tools = document.getElementById('tools').value;
+                const goals = document.getElementById('goals').value;
+                
+                if (!projectName || !selectedProjectType) {
+                    showAlert('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Save to projects array
+                const newProject = {
+                    name: projectName,
+                    type: selectedProjectType,
+                    skill: skillLevel,
+                    budget: selectedBudget,
+                    time: timeCommitment,
+                    tools,
+                    goals,
+                    progress: 0,
+                    checklist: []
+                };
+                
+                savedProjects.push(newProject);
+                saveProjectsToStorage();
+                
+                showAlert('Project saved successfully!', 'success');
+                updateProjectBadge();
+                
+                // Show projects list
+                showSection('my-projects');
+            }
+            
+            // Share project
+            function shareProject() {
+                const projectName = document.getElementById('project-name').value;
+                if (!projectName) {
+                    showAlert('Please name your project first', 'error');
+                    return;
+                }
+                
+                // In a real app, this would open share dialog
+                showAlert(`"${projectName}" project is ready to share!`, 'success');
+            }
+            
+            // Export project to PDF
+            function exportProjectToPdf() {
+                // In a real app, this would generate PDF
+                showAlert('PDF export feature coming soon!', 'success');
+            }
+            
+            // Print project
+            function printProject() {
+                window.print();
+            }
+            
+            // Save calculation
+            function saveCalculation() {
+                // In a real app, this would save calculation
+                showAlert('Calculation saved!', 'success');
+            }
+            
+            // Search tutorials
+            function searchTutorials() {
+                // In a real app, this would filter tutorials
+                showAlert('Search feature coming soon!', 'success');
+            }
+            
+            // Get recommendations
+            function getRecommendations() {
+                const projectName = document.getElementById('project-name').value;
+                const skillLevel = document.getElementById('skill-level').value;
+                const timeCommitment = document.getElementById('time-commitment').value;
+                const tools = document.getElementById('tools').value;
+                const goals = document.getElementById('goals').value;
+                
+                if (!projectName || !selectedProjectType || !selectedBudget) {
+                    showAlert('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                getRecsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+                getRecsBtn.disabled = true;
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    // Generate mock recommendations
+                    const recommendations = generateMockRecommendations(
+                        projectName,
+                        selectedProjectType,
+                        skillLevel,
+                        selectedBudget,
+                        timeCommitment,
+                        tools,
+                        goals
+                    );
+                    
+                    // Show chat assistant with recommendations
+                    showSection('chat-assistant');
+                    
+                    // Add recommendations to chat
+                    addBotMessage(recommendations);
+                    
+                    // Reset button
+                    getRecsBtn.innerHTML = '<i class="fas fa-magic"></i> Generate AI-Powered Plan';
+                    getRecsBtn.disabled = false;
+                    
+                    // Scroll to bottom of chat
+                    setTimeout(() => {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 100);
+                }, 2000);
+            }
+            
+            // Generate mock recommendations
+            function generateMockRecommendations(name, type, skill, budget, time, tools, goals) {
+                let recommendations = `
+                    <strong>Your ${name} Project Plan</strong><br><br>
+                    Based on your inputs, here's a customized plan for your ${type} project:<br><br>
+                    
+                    <strong>Project Overview:</strong><br>
+                    - Type: ${type}<br>
+                    - Skill Level: ${skill}<br>
+                    - Budget: ${budget}<br>
+                    - Timeframe: ${time}<br><br>
+                    
+                    <strong>Project Goals:</strong><br>
+                    ${goals || 'No specific goals provided'}<br><br>
+                    
+                    <strong>Recommended Steps:</strong><br>
+                    <ol>
+                `;
+                
+                // Generate steps based on project type
+                if (type === 'kitchen') {
+                    recommendations += `
+                        <li>Plan your layout and measure your space</li>
+                        <li>Select materials (countertops, cabinets, backsplash)</li>
+                        <li>Remove old fixtures and appliances</li>
+                        <li>Install new cabinets and countertops</li>
+                        <li>Update electrical and plumbing as needed</li>
+                        <li>Install backsplash and finishing touches</li>
+                    `;
+                } else if (type === 'bathroom') {
+                    recommendations += `
+                        <li>Plan your layout and select materials</li>
+                        <li>Remove old fixtures and tiles</li>
+                        <li>Install new plumbing fixtures</li>
+                        <li>Tile the shower/walls</li>
+                        <li>Install new vanity and lighting</li>
+                        <li>Add finishing touches and accessories</li>
+                    `;
+                } else {
+                    recommendations += `
+                        <li>Research design inspiration</li>
+                        <li>Create a detailed project plan</li>
+                        <li>Purchase materials and tools</li>
+                        <li>Prepare the space for work</li>
+                        <li>Execute the main project work</li>
+                        <li>Add finishing touches and cleanup</li>
+                    `;
+                }
+                
+                recommendations += `
+                    </ol><br>
+                    
+                    <strong>Tools You'll Need:</strong><br>
+                    ${tools || 'Basic tools (hammer, screwdrivers, level)'}<br><br>
+                    
+                    <strong>Budget Tips:</strong><br>
+                    - Consider ${budget.includes('$500') ? 'repurposing existing materials' : 'comparing quotes from multiple suppliers'}<br>
+                    - ${budget.includes('$10,000') ? 'Hire professionals for complex tasks' : 'DIY where possible to save costs'}<br><br>
+                    
+                    <strong>Time Management:</strong><br>
+                    - Break project into phases<br>
+                    - ${time.includes('weekend') ? 'Focus on one area at a time' : 'Create a weekly schedule'}<br><br>
+                    
+                    Would you like me to generate a detailed materials list or find tutorials for any specific step?
+                `;
+                
+                return recommendations;
+            }
+            
+            // Send chat message
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (!message) return;
+                
+                // Add user message to chat
+                addUserMessage(message);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                // Simulate bot response after delay
+                setTimeout(() => {
+                    // Remove typing indicator
+                    removeTypingIndicator();
+                    
+                    // Generate response
+                    const response = generateBotResponse(message);
+                    addBotMessage(response);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1500);
+            }
+            
+            // Add user message to chat
+            function addUserMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', 'user-message');
+                messageElement.innerHTML = message;
+                chatMessages.appendChild(messageElement);
+                
+                // Add to conversation history
+                conversationHistory.push({ role: 'user', content: message });
+            }
+            
+            // Add bot message to chat
+            function addBotMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', 'bot-message');
+                messageElement.innerHTML = message;
+                chatMessages.appendChild(messageElement);
+                
+                // Add to conversation history
+                conversationHistory.push({ role: 'assistant', content: message });
+            }
+            
+            // Show typing indicator
+            function showTypingIndicator() {
+                const typingElement = document.createElement('div');
+                typingElement.classList.add('typing-indicator');
+                typingElement.id = 'typing-indicator';
+                typingElement.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatMessages.appendChild(typingElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Remove typing indicator
+            function removeTypingIndicator() {
+                const typingElement = document.getElementById('typing-indicator');
+                if (typingElement) {
+                    typingElement.remove();
+                }
+            }
+            
+            // Generate bot response
+            function generateBotResponse(message) {
+                // Simple response logic - in a real app, this would call an AI API
+                const lowerMessage = message.toLowerCase();
+                
+                // Check for greetings
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    return "Hello! How can I assist you with your home improvement project today?";
+                } 
+                
+                // Check for thanks
+                else if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
+                    return "You're welcome! Is there anything else I can help you with?";
+                }
+                
+                // Check for questions about the assistant
+                else if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you') || 
+                         lowerMessage.includes('about you') || lowerMessage.includes('yourself')) {
+                    return `
+                        <strong>I'm your Home Improvement Assistant!</strong><br><br>
+                        I'm here to help you with all aspects of home improvement projects. I can:<br>
+                        - Provide step-by-step guidance for your projects<br>
+                        - Recommend materials and tools<br>
+                        - Help with budgeting and planning<br>
+                        - Offer design ideas and inspiration<br>
+                        - Connect you with tutorials and resources<br><br>
+                        Think of me as your personal home improvement expert, available 24/7 to answer your questions and help make your projects successful!
+                    `;
+                }
+                
+                // Check for capabilities questions
+                else if (lowerMessage.includes('can you') || lowerMessage.includes('what can you') || 
+                         lowerMessage.includes('help with') || lowerMessage.includes('do you do')) {
+                    return `
+                        <strong>I can help with a wide range of home improvement topics:</strong><br><br>
+                        <ul>
+                            <li>Kitchen and bathroom remodeling</li>
+                            <li>Painting and decorating</li>
+                            <li>Flooring installation</li>
+                            <li>Outdoor projects (decks, fences, landscaping)</li>
+                            <li>Electrical and plumbing basics</li>
+                            <li>Space planning and design</li>
+                            <li>Budgeting and material calculations</li>
+                            <li>Tool recommendations and safety</li>
+                        </ul><br>
+                        Just ask me about any specific project or challenge you're facing!
+                    `;
+                }
+                
+                // Check for project-specific questions
+                else if (selectedProjectType && (
+                    lowerMessage.includes('material') || 
+                    lowerMessage.includes('supply') ||
+                    lowerMessage.includes('need to buy') ||
+                    lowerMessage.includes('purchase')
+                )) {
+                    return generateMaterialsResponse();
+                }
+                
+                // Check for tutorial requests
+                else if (lowerMessage.includes('tutorial') || 
+                         lowerMessage.includes('video') || 
+                         lowerMessage.includes('guide') ||
+                         lowerMessage.includes('how to')) {
+                    return generateTutorialsResponse();
+                }
+                
+                // Check for budget questions
+                else if (lowerMessage.includes('budget') || 
+                         lowerMessage.includes('cost') || 
+                         lowerMessage.includes('price') ||
+                         lowerMessage.includes('save money')) {
+                    return generateBudgetResponse();
+                }
+                
+                // Check for time questions
+                else if (lowerMessage.includes('time') || 
+                         lowerMessage.includes('long') || 
+                         lowerMessage.includes('duration') ||
+                         lowerMessage.includes('schedule')) {
+                    return generateTimeResponse();
+                }
+                
+                // Check for tool questions
+                else if (lowerMessage.includes('tool') || 
+                         lowerMessage.includes('equipment') || 
+                         lowerMessage.includes('need') ||
+                         lowerMessage.includes('require')) {
+                    return generateToolsResponse();
+                }
+                
+                // Check for project details
+                else if (lowerMessage.includes('detail') || 
+                         lowerMessage.includes('more') || 
+                         lowerMessage.includes('about') ||
+                         lowerMessage.includes('explain') ||
+                         lowerMessage.includes('info')) {
+                    return generateProjectDetailsResponse();
+                }
+                
+                // Check for specific project step questions
+                else if (lowerMessage.includes('step') || 
+                         lowerMessage.includes('process') || 
+                         lowerMessage.includes('procedure') ||
+                         lowerMessage.includes('how do i')) {
+                    return generateStepByStepResponse();
+                }
+                
+                // Check for design ideas
+                else if (lowerMessage.includes('design') || 
+                         lowerMessage.includes('idea') || 
+                         lowerMessage.includes('inspiration') ||
+                         lowerMessage.includes('look')) {
+                    return generateDesignIdeasResponse();
+                }
+                
+                // Check for out-of-bounds questions
+                else if (lowerMessage.includes('weather') || 
+                         lowerMessage.includes('news') || 
+                         lowerMessage.includes('sport') ||
+                         lowerMessage.includes('politics') ||
+                         lowerMessage.includes('stock') ||
+                         lowerMessage.includes('finance')) {
+                    return "I'm sorry, but I can only answer questions related to home improvement projects. How can I help you with your project?";
+                }
+                
+                // Default response
+                else {
+                    return "I'm not sure I understand your question. Could you please rephrase it or ask about something related to home improvement projects?";
+                }
+            }
+            
+            // Generate materials response
+            function generateMaterialsResponse() {
+                if (!selectedProjectType) {
+                    return "I can certainly help with materials! First, could you tell me what type of project you're working on?";
+                }
+                
+                let response = `For your ${selectedProjectType} project, here are the typical materials you'll need:<br><br>`;
+                
+                switch(selectedProjectType) {
+                    case 'kitchen':
+                        response += `
+                            - Cabinets (pre-assembled or ready-to-assemble)<br>
+                            - Countertop material (granite, quartz, laminate)<br>
+                            - Backsplash tiles<br>
+                            - Sink and faucet<br>
+                            - Appliances (refrigerator, stove, etc.)<br>
+                            - Hardware (handles, knobs)<br>
+                            - Lighting fixtures<br>
+                        `;
+                        break;
+                        
+                    case 'bathroom':
+                        response += `
+                            - Vanity and sink<br>
+                            - Faucet and shower fixtures<br>
+                            - Tile for floor and walls<br>
+                            - Toilet<br>
+                            - Mirror and lighting<br>
+                            - Grout and sealant<br>
+                        `;
+                        break;
+                        
+                    case 'painting':
+                        response += `
+                            - Paint (interior/exterior as needed)<br>
+                            - Primer<br>
+                            - Paint brushes and rollers<br>
+                            - Painter's tape<br>
+                            - Drop cloths<br>
+                            - Sandpaper and spackle for prep<br>
+                        `;
+                        break;
+                        
+                    default:
+                        response += `
+                            - Materials will vary based on your specific project<br>
+                            - Would you like me to suggest materials based on your project dimensions?
+                        `;
+                }
+                
+                response += `<br>Would you like me to calculate the quantities needed based on your room dimensions?`;
+                return response;
+            }
+            
+            // Generate tutorials response
+            function generateTutorialsResponse() {
+                if (!selectedProjectType) {
+                    return "I can recommend tutorials for your project! First, could you tell me what type of project you're working on?";
+                }
+                
+                let response = `Here are some great tutorial topics for your ${selectedProjectType} project:<br><br>`;
+                
+                switch(selectedProjectType) {
+                    case 'kitchen':
+                        response += `
+                            - How to install kitchen cabinets<br>
+                            - Countertop installation guide<br>
+                            - Backsplash tiling techniques<br>
+                            - Kitchen lighting installation<br>
+                            - Appliance installation tips<br>
+                        `;
+                        break;
+                        
+                    case 'bathroom':
+                        response += `
+                            - Bathroom tiling for beginners<br>
+                            - How to install a vanity<br>
+                            - Toilet installation guide<br>
+                            - Shower waterproofing techniques<br>
+                            - Bathroom ventilation installation<br>
+                        `;
+                        break;
+                        
+                    default:
+                        response += `
+                            - General DIY home improvement techniques<br>
+                            - Project planning and budgeting<br>
+                            - Tool safety and usage guides<br>
+                        `;
+                }
+                
+                response += `<br>Would you like me to open one of these tutorials for you?`;
+                return response;
+            }
+            
+            // Generate budget response
+            function generateBudgetResponse() {
+                if (!selectedBudget) {
+                    return "I can provide budget tips! First, could you tell me what your project budget is?";
+                }
+                
+                let response = `For your ${selectedBudget} budget, here are some recommendations:<br><br>`;
+                
+                if (selectedBudget.includes('$500')) {
+                    response += `
+                        - Focus on cosmetic updates rather than structural changes<br>
+                        - Consider refinishing rather than replacing items<br>
+                        - Shop for materials at discount stores or reuse centers<br>
+                        - Do all the work yourself to save on labor costs<br>
+                    `;
+                } else if (selectedBudget.includes('$10,000')) {
+                    response += `
+                        - Get multiple quotes from contractors<br>
+                        - Consider higher-end materials that will last longer<br>
+                        - Invest in energy-efficient upgrades<br>
+                        - Plan for unexpected costs (10-20% buffer)<br>
+                    `;
+                } else {
+                    response += `
+                        - Balance DIY with professional help where needed<br>
+                        - Prioritize the most important upgrades first<br>
+                        - Look for mid-range materials that offer good value<br>
+                        - Consider phased projects if budget is tight<br>
+                    `;
+                }
+                
+                response += `<br>Would you like me to help create a detailed budget breakdown?`;
+                return response;
+            }
+            
+            // Generate time response
+            function generateTimeResponse() {
+                if (!projectDetails.timeCommitment) {
+                    return "I can help with project timelines! First, could you tell me your estimated time commitment?";
+                }
+                
+                let response = `For your ${projectDetails.timeCommitment} project, here are some scheduling tips:<br><br>`;
+                
+                if (projectDetails.timeCommitment.includes('weekend')) {
+                    response += `
+                        - Focus on one small area at a time<br>
+                        - Prepare all materials and tools beforehand<br>
+                        - Have a clear plan to maximize your limited time<br>
+                        - Consider simple projects that can be completed quickly<br>
+                    `;
+                } else if (projectDetails.timeCommitment.includes('month')) {
+                    response += `
+                        - Break the project into weekly milestones<br>
+                        - Schedule time for unexpected delays<br>
+                        - Order materials well in advance<br>
+                        - Consider professional help for complex tasks<br>
+                    `;
+                } else {
+                    response += `
+                        - Create a detailed project schedule<br>
+                        - Set aside regular time for project work<br>
+                        - Coordinate with any helpers or contractors<br>
+                        - Allow time for drying/curing between steps<br>
+                    `;
+                }
+                
+                response += `<br>Would you like me to create a detailed timeline for your project?`;
+                return response;
+            }
+            
+            // Generate tools response
+            function generateToolsResponse() {
+                if (!projectDetails.tools) {
+                    return "I can recommend tools for your project! First, could you tell me what tools you already have?";
+                }
+                
+                let response = `Based on your project and the tools you have (${projectDetails.tools}), here's what you might need:<br><br>`;
+                
+                if (selectedProjectType === 'kitchen' || selectedProjectType === 'bathroom') {
+                    response += `
+                        - Power drill/driver<br>
+                        - Level<br>
+                        - Tile saw (for tiling projects)<br>
+                        - Caulk gun<br>
+                        - Measuring tape<br>
+                    `;
+                } else if (selectedProjectType === 'painting') {
+                    response += `
+                        - Paint brushes (multiple sizes)<br>
+                        - Rollers and extension pole<br>
+                        - Paint tray<br>
+                        - Sanding block or electric sander<br>
+                        - Putty knife<br>
+                    `;
+                } else {
+                    response += `
+                        - Basic hand tools (hammer, screwdrivers, wrench set)<br>
+                        - Power saw (circular or miter saw)<br>
+                        - Safety equipment (gloves, goggles, mask)<br>
+                        - Measuring and leveling tools<br>
+                    `;
+                }
+                
+                response += `<br>Would you like me to suggest where to rent or purchase these tools?`;
+                return response;
+            }
+            
+            // Generate project details response
+            function generateProjectDetailsResponse() {
+                if (!selectedProjectType) {
+                    return "I'd be happy to provide more details! First, could you tell me what type of project you're working on?";
+                }
+                
+                let response = `Here are more details about ${selectedProjectType} projects:<br><br>`;
+                
+                switch(selectedProjectType) {
+                    case 'kitchen':
+                        response += `
+                            <strong>Typical Kitchen Remodel Steps:</strong><br>
+                            1. Planning and design<br>
+                            2. Demolition of old elements<br>
+                            3. Electrical and plumbing updates<br>
+                            4. Cabinet installation<br>
+                            5. Countertop installation<br>
+                            6. Appliance installation<br>
+                            7. Backsplash and finishing touches<br><br>
+                            
+                            <strong>Key Considerations:</strong><br>
+                            - Workflow triangle between sink, stove, and refrigerator<br>
+                            - Adequate counter space and storage<br>
+                            - Lighting for task and ambiance<br>
+                        `;
+                        break;
+                        
+                    case 'bathroom':
+                        response += `
+                            <strong>Typical Bathroom Remodel Steps:</strong><br>
+                            1. Planning and design<br>
+                            2. Demolition of old elements<br>
+                            3. Plumbing and electrical work<br>
+                            4. Waterproofing and subfloor prep<br>
+                            5. Tile installation<br>
+                            6. Fixture installation<br>
+                            7. Finishing touches<br><br>
+                            
+                            <strong>Key Considerations:</strong><br>
+                            - Proper waterproofing in wet areas<br>
+                            - Adequate ventilation to prevent mold<br>
+                            - Storage solutions for toiletries<br>
+                        `;
+                        break;
+                        
+                    default:
+                        response += `
+                            <strong>General Project Tips:</strong><br>
+                            - Always start with a clear plan and measurements<br>
+                            - Check local building codes and permits<br>
+                            - Prepare the workspace before starting<br>
+                            - Allow time for each step to dry/set properly<br>
+                            - Clean up thoroughly when finished<br>
+                        `;
+                }
+                
+                response += `<br>Would you like more specific information about any of these aspects?`;
+                return response;
+            }
+            
+            // Generate step-by-step response
+            function generateStepByStepResponse() {
+                if (!selectedProjectType) {
+                    return "I can provide step-by-step guidance! First, could you tell me what type of project you're working on?";
+                }
+                
+                let response = `Here's a general step-by-step process for your ${selectedProjectType} project:<br><br>`;
+                
+                if (selectedProjectType === 'kitchen') {
+                    response += `
+                        <ol>
+                            <li><strong>Planning Phase:</strong> Measure your space, create a layout, and select materials</li>
+                            <li><strong>Preparation:</strong> Clear the area, protect floors and furniture, gather tools</li>
+                            <li><strong>Demolition:</strong> Remove old cabinets, countertops, and appliances</li>
+                            <li><strong>Structural Work:</strong> Make any necessary plumbing/electrical changes</li>
+                            <li><strong>Installation:</strong> Install new cabinets, countertops, and appliances</li>
+                            <li><strong>Finishing:</strong> Add backsplash, paint, and final touches</li>
+                        </ol>
+                    `;
+                } else if (selectedProjectType === 'bathroom') {
+                    response += `
+                        <ol>
+                            <li><strong>Planning:</strong> Design layout and select fixtures/tiles</li>
+                            <li><strong>Preparation:</strong> Remove old fixtures and prepare surfaces</li>
+                            <li><strong>Plumbing:</strong> Install or update plumbing as needed</li>
+                            <li><strong>Waterproofing:</strong> Apply waterproof membranes in wet areas</li>
+                            <li><strong>Tiling:</strong> Install floor and wall tiles</li>
+                            <li><strong>Fixtures:</strong> Install vanity, toilet, and shower/bath</li>
+                            <li><strong>Finishing:</strong> Add mirrors, lighting, and accessories</li>
+                        </ol>
+                    `;
+                } else {
+                    response += `
+                        <ol>
+                            <li><strong>Planning:</strong> Define your goals and create a project plan</li>
+                            <li><strong>Preparation:</strong> Gather materials and tools, prepare the workspace</li>
+                            <li><strong>Execution:</strong> Complete the main project work step-by-step</li>
+                            <li><strong>Finishing:</strong> Add final touches and clean up</li>
+                            <li><strong>Review:</strong> Inspect your work and make any necessary adjustments</li>
+                        </ol>
+                    `;
+                }
+                
+                response += `<br>Would you like more detailed instructions for any particular step?`;
+                return response;
+            }
+            
+            // Generate design ideas response
+            function generateDesignIdeasResponse() {
+                if (!selectedProjectType) {
+                    return "I'd love to share design ideas! First, could you tell me what type of project you're working on?";
+                }
+                
+                let response = `Here are some design ideas for your ${selectedProjectType} project:<br><br>`;
+                
+                if (selectedProjectType === 'kitchen') {
+                    response += `
+                        <strong>Popular Kitchen Design Trends:</strong><br>
+                        - Two-tone cabinets (dark lowers, light uppers)<br>
+                        - Quartz countertops with subtle veining<br>
+                        - Matte black fixtures and hardware<br>
+                        - Open shelving mixed with closed storage<br>
+                        - Large format tile backsplashes<br>
+                        - Smart storage solutions (pull-out shelves, drawer organizers)<br>
+                    `;
+                } else if (selectedProjectType === 'bathroom') {
+                    response += `
+                        <strong>Bathroom Design Inspiration:</strong><br>
+                        - Spa-like features (rain showerheads, freestanding tubs)<br>
+                        - Large format tiles for a seamless look<br>
+                        - Floating vanities for easy cleaning<br>
+                        - Heated floors for comfort<br>
+                        - Backlit mirrors for task lighting<br>
+                        - Neutral color palettes with natural wood accents<br>
+                    `;
+                } else {
+                    response += `
+                        <strong>General Design Tips:</strong><br>
+                        - Consider the room's natural light when choosing colors<br>
+                        - Create a focal point in the space (fireplace, artwork, etc.)<br>
+                        - Mix textures for visual interest (smooth, rough, soft)<br>
+                        - Ensure good flow and functionality in the layout<br>
+                        - Choose durable materials that suit your lifestyle<br>
+                    `;
+                }
+                
+                response += `<br>Would you like to see some inspirational photos or color scheme suggestions?`;
+                return response;
+            }
+            
+            // Toggle voice input
+            function toggleVoiceInput() {
+                if (!recognition) {
+                    showAlert('Voice input not supported in your browser', 'error');
+                    return;
+                }
+                
+                if (isListening) {
+                    stopVoiceInput();
+                } else {
+                    startVoiceInput();
+                }
+            }
+            
+            // Start voice input
+            function startVoiceInput() {
+                try {
+                    recognition.start();
+                    voiceInputBtn.classList.add('listening');
+                    isListening = true;
+                    voiceInputBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+                    showAlert('Listening... Speak now', 'success');
+                } catch (e) {
+                    console.error('Voice recognition error:', e);
+                    showAlert('Error starting voice input', 'error');
+                }
+            }
+            
+            // Stop voice input
+            function stopVoiceInput() {
+                recognition.stop();
+                voiceInputBtn.classList.remove('listening');
+                isListening = false;
+                voiceInputBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            }
+            
+            // Play video
+            function playVideo(index) {
+                const videoTitles = [
+                    'Kitchen Cabinet Makeover on a Budget',
+                    'Bathroom Tile Installation Guide',
+                    'Professional Painting Techniques',
+                    'How to Install Laminate Flooring',
+                    'DIY Deck Building Guide',
+                    'Modern Lighting Installation'
+                ];
+                
+                const videoIds = [
+                    '7vX2j9O7RkE',
+                    '3FLEvOWdQh0',
+                    '5bTp8bGqN8Y',
+                    '8Qn_spdM5Zg',
+                    '9X_QjJg-n4k',
+                    '2E5aOl5QmOo'
+                ];
+                
+                document.getElementById('video-modal-title').textContent = videoTitles[index];
+                videoIframe.src = `https://www.youtube.com/embed/${videoIds[index]}?autoplay=1`;
+                toggleModal(videoModal);
+            }
+            
+            // Calculate materials
+            function calculateMaterials() {
+                const projectType = document.getElementById('calc-project-type').value;
+                const length = parseFloat(document.getElementById('calc-length').value) || 0;
+                const width = parseFloat(document.getElementById('calc-width').value) || 0;
+                const height = parseFloat(document.getElementById('calc-height').value) || 0;
+                
+                let result = '<strong>Estimated Materials Needed:</strong><br>';
+                
+                switch (projectType) {
+                    case 'painting':
+                        const wallArea = 2 * (length + width) * height;
+                        const paintGallons = Math.ceil(wallArea / 350);
+                        result += `
+                            - ${paintGallons} gallons of paint (covers ~350 sq ft/gallon)<br>
+                            - ${Math.ceil(wallArea / 200)} primer gallons<br>
+                            - 2-3 paint rollers and trays<br>
+                            - Paint brushes (2-3 sizes)<br>
+                            - Painter's tape and drop cloths<br>
+                            <br>Total wall area: ${wallArea.toFixed(2)} sq ft
+                        `;
+                        break;
+                        
+                    case 'flooring':
+                        const floorArea = length * width;
+                        const flooringPacks = Math.ceil(floorArea * 1.1 / 20); // 10% extra, 20 sq ft per pack
+                        result += `
+                            - ${flooringPacks} packs of flooring (20 sq ft per pack)<br>
+                            - Underlayment for ${floorArea.toFixed(2)} sq ft<br>
+                            - Transition strips and moldings<br>
+                            - Installation kit (spacers, pull bar, tapping block)<br>
+                            <br>Total floor area: ${floorArea.toFixed(2)} sq ft
+                        `;
+                        break;
+                        
+                    case 'tiling':
+                        const tileArea = length * width;
+                        const tileBoxes = Math.ceil(tileArea * 1.15 / 10); // 15% extra, 10 sq ft per box
+                        result += `
+                            - ${tileBoxes} boxes of tile (10 sq ft per box)<br>
+                            - ${Math.ceil(tileArea / 30)} bags of thinset mortar (covers ~30 sq ft/bag)<br>
+                            - ${Math.ceil(tileArea / 50)} bags of grout<br>
+                            - Tile spacers, trowel, and float<br>
+                            <br>Total tile area: ${tileArea.toFixed(2)} sq ft
+                        `;
+                        break;
+                        
+                    default:
+                        result += `
+                            - Materials will vary based on project type<br>
+                            - Please consult with a specialist for accurate estimates<br>
+                            <br>Area: ${(length * width).toFixed(2)} sq ft
+                        `;
+                }
+                
+                calcResult.innerHTML = result;
+                showAlert('Calculation complete!', 'success');
+            }
+            
+            // Show alert
+            function showAlert(message, type = 'success') {
+                const alert = document.createElement('div');
+                alert.classList.add('alert', `alert-${type}`);
+                alert.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                    ${message}
+                `;
+                
+                document.body.appendChild(alert);
+                
+                // Remove after delay
+                setTimeout(() => {
+                    alert.style.animation = 'fadeOut 0.5s ease-out';
+                    setTimeout(() => alert.remove(), 500);
+                }, 3000);
+            }
+            
+            // Initialize the app
+            init();
+        });
+    </script>
+</body>
+</html>
